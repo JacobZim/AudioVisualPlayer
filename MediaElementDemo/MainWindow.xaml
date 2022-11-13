@@ -12,44 +12,77 @@
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
-            <RowDefinition Height="22"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="White" BorderThickness="1">
+        <Border BorderBrush="White" BorderThickness="1" Grid.Row="1">
             <MediaElement Name="Media" Margin="2" LoadedBehavior="Manual"/>
         </Border>
 
-        <TextBlock Name="MediaName" Grid.Row="1" Foreground="White">No Media</TextBlock>
+        <TextBlock Name="MediaName" Grid.Row="2" Foreground="White">No Media</TextBlock>
 
-        <StackPanel Grid.Column="1">
-            <Button Click="PlayButton_Click">Play</Button>
-            <Button Click="PauseButton_Click">Pause</Button>
-            <Button Click="StopButton_Click">Stop</Button>
-            <ToggleButton Click="MuteButton_Click" Margin="0 5 0 0">Mute</ToggleButton>
-
-            <TextBlock FontSize="10">Volume</TextBlock>
-            <Slider Name="VolumeSlider"
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center" Grid.Column="0">
+                <TextBlock FontSize="10">Volume</TextBlock>
+                <Slider Name="VolumeSlider"
                     Value="0.75" Maximum="1"
                     ValueChanged="VolumeSlider_ValueChanged"/>
-
-            <TextBlock FontSize="10">Balance</TextBlock>
-            <Slider Name="BalanceSlider"
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Grid.Column="1">
+                <TextBlock FontSize="10">Balance</TextBlock>
+                <Slider Name="BalanceSlider"
                     Value="0" Minimum="-1" Maximum="1"
                     ValueChanged="Balance_ValueChanged"/>
-
-            <TextBlock FontSize="10">Speed</TextBlock>
-            <Slider Name="SpeedSlider"
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Grid.Column="2">
+                <TextBlock FontSize="10">Speed</TextBlock>
+                <Slider Name="SpeedSlider"
                     Value="1" Minimum="0" Maximum="4"
                     ValueChanged="Speed_ValueChanged"
                     TickPlacement="Both"
                     IsSnapToTickEnabled="True">
-                <Slider.Ticks>
-                    0, 0.25, 0.5, 1, 2, 4
-                </Slider.Ticks>
-            </Slider>
-        </StackPanel>
+                    <Slider.Ticks>
+                        0, 0.25, 0.5, 1, 2, 4
+                    </Slider.Ticks>
+                </Slider>
+            </StackPanel>
+            <ToggleButton Click="MuteButton_Click" Grid.Column="3"
+                          Margin="8" Width="44">Mute</ToggleButton>
+        </Grid>
 
-        <Button Grid.Row="1" Grid.Column="1" Click="LoadButton_Click">Load</Button>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <Slider Name="VideoSlider"
+                    Value="0" Minimum="0" Maximum="360"
+                    ValueChanged="Speed_ValueChanged"
+                    Grid.Column="0"
+                    VerticalAlignment="Center">
+            </Slider>
+            <Button Click="PlayButton_Click"
+                    Margin="8"
+                    Grid.Column="1">Play
+            </Button>
+        </Grid>
+
+        <Border BorderBrush="White" BorderThickness="1" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Click="LoadButton_Click">Load</Button>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

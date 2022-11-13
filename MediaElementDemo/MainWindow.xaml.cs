@@ -21,7 +21,7 @@ namespace MediaElementDemo
         {
             InitializeComponent();
         }
-
+        /*
         private void SkipBlockedTimes()
         {
             // if the mediaElement is between forbidden times, skip past it
@@ -40,7 +40,7 @@ namespace MediaElementDemo
                 }
             }
         }
-
+        */
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
