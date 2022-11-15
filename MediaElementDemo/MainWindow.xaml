@@ -30,7 +30,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
-            <StackPanel VerticalAlignment="Center" Grid.Column="0">
+            <StackPanel VerticalAlignment="Center" Grid.Column="2">
                 <TextBlock FontSize="10">Volume</TextBlock>
                 <Slider Name="VolumeSlider"
                     Value="0.75" Maximum="1"
@@ -42,7 +42,7 @@
                     Value="0" Minimum="-1" Maximum="1"
                     ValueChanged="Balance_ValueChanged"/>
             </StackPanel>
-            <StackPanel VerticalAlignment="Center" Grid.Column="2">
+            <StackPanel VerticalAlignment="Center" Grid.Column="0">
                 <TextBlock FontSize="10">Speed</TextBlock>
                 <Slider Name="SpeedSlider"
                     Value="1" Minimum="0" Maximum="4"
@@ -55,33 +55,50 @@
                 </Slider>
             </StackPanel>
             <ToggleButton Click="MuteButton_Click" Grid.Column="3"
-                          Margin="8" Width="44">Mute</ToggleButton>
+                          Margin="6" Width="48" Name="MuteButton">Mute</ToggleButton>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="2">
+        <Grid Grid.Column="0" Grid.Row="2" Margin="4 0 4 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Slider Name="VideoSlider"
                     Value="0" Minimum="0" Maximum="360"
-                    ValueChanged="Speed_ValueChanged"
                     Grid.Column="0"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Thumb.DragStarted="Progress_DragStarted"  Thumb.DragCompleted="Progress_DragCompleted" ValueChanged="Progress_ValueChanged">
             </Slider>
-            <Button Click="PlayButton_Click"
-                    Margin="8"
-                    Grid.Column="1">Play
-            </Button>
+            
+            <Button Name="backward_ten" Click="BackwardButton_Click" Grid.Column="1" Margin="0 16 0 16">-10</Button>
+
+            <StackPanel Grid.Column="2">
+                <Button Click="PlayButton_Click" Height="36" Width="36" Margin="2">
+                    <StackPanel>
+                        <!--<Image Source="../images/play_button.jpg"/>-->
+                        <TextBlock Name="play_pause_text">Play</TextBlock>
+                    </StackPanel>
+                </Button>
+                <TextBox Name="time_display"  Text="00:00:00" Margin="2" />
+            </StackPanel>
+
+            <Button Name="forward_ten" Click="ForwardButton_Click" Grid.Column="3" Margin="0 16 0 16">+10</Button>
         </Grid>
 
         <Border BorderBrush="White" BorderThickness="1" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Button Click="LoadButton_Click">Load</Button>
+                <Button Click="LoadButton_Click">Load Media</Button>
+                <Button Click="LoadSkipped_Click" Grid.Row="1">Load Skipped</Button>
+                <TextBlock Grid.Row="2" Margin="2" VerticalAlignment="Bottom">Time Skipped</TextBlock>
+                <ComboBox Name="timesCombo" Grid.Row="3"></ComboBox>
             </Grid>
         </Border>
     </Grid>
