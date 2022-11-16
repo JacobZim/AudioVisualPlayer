@@ -22,12 +22,16 @@ namespace MediaElementDemo
     public partial class MainWindow : Window
     {
         bool mIsPlaying = false;
-        private bool mediaPlayerIsPlaying = false;
+        //private bool mediaPlayerIsPlaying = false;
         private bool userIsDraggingSlider = false;
         private string[] lines;
+        private bool sidebar_enabled = true;
+        private GridLength buffer;
+        //private bool single_flag = true;
         public MainWindow()
         {
             InitializeComponent();
+            buffer = SideBar.Width;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(.1);
@@ -47,7 +51,8 @@ namespace MediaElementDemo
                 //double cut = TimesStringToDouble(words[0]);
                 //double restart - TimeStringToDouble(words[1]);
                 if (Media.Position.TotalSeconds >= cut 
-                    && Media.Position.TotalSeconds < restart)
+                    && Media.Position.TotalSeconds < restart
+                    && check_skip_times.IsChecked == true)
                 {
                     Media.Position = TimeSpan.FromSeconds(restart);
                 }
@@ -69,6 +74,12 @@ namespace MediaElementDemo
             }
         }
 
+        private void SideBar_Click(object sender, RoutedEventArgs e)
+        {
+            sidebar_enabled = !sidebar_enabled;
+            if (sidebar_enabled) SideBar.Width = buffer;
+            else SideBar.Width = ZeroColumn.Width;
+        }
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -102,6 +113,11 @@ namespace MediaElementDemo
         {
             if (Media.CanPause)
                 Media.Pause();
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Media.Position = TimeSpan.Zero;
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)

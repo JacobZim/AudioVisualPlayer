@@ -9,7 +9,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80" Name="SideBar"/>
+            <ColumnDefinition Width="0" Name="ZeroColumn"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -21,7 +22,8 @@
             <MediaElement Name="Media" Margin="2" LoadedBehavior="Manual"/>
         </Border>
 
-        <TextBlock Name="MediaName" Grid.Row="2" Foreground="White">No Media</TextBlock>
+        <Button Grid.Row="1" Grid.Column="0" Width="12" Height="12" Name="sidebar_button" Click="SideBar_Click" HorizontalAlignment="Right"></Button>
+
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -65,14 +67,18 @@
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
-            <Slider Name="VideoSlider"
+            <StackPanel Grid.Column="0">
+                <TextBlock Name="MediaName" Foreground="White">No Media</TextBlock>
+                <Slider Name="VideoSlider"
                     Value="0" Minimum="0" Maximum="360"
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Center" Margin="0 6 0 0"
                     Thumb.DragStarted="Progress_DragStarted"  Thumb.DragCompleted="Progress_DragCompleted" ValueChanged="Progress_ValueChanged">
-            </Slider>
-            
-            <Button Name="backward_ten" Click="BackwardButton_Click" Grid.Column="1" Margin="0 16 0 16">-10</Button>
+                </Slider>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Button Name="backward_ten" Click="BackwardButton_Click" Margin="0 16 0 2" Height="28">-10</Button>
+                <Button Name="restart_button" Click="RestartButton_Click" Content="&lt;&lt;" Height="12" Padding="-4"></Button>
+            </StackPanel>
 
             <StackPanel Grid.Column="2">
                 <Button Click="PlayButton_Click" Height="36" Width="36" Margin="2">
@@ -97,7 +103,10 @@
                 </Grid.RowDefinitions>
                 <Button Click="LoadButton_Click">Load Media</Button>
                 <Button Click="LoadSkipped_Click" Grid.Row="1">Load Skipped</Button>
-                <TextBlock Grid.Row="2" Margin="2" VerticalAlignment="Bottom">Time Skipped</TextBlock>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Margin="0">Skip Times</TextBlock>
+                    <CheckBox Name="check_skip_times" IsChecked="True" Margin="3"></CheckBox>
+                </StackPanel>
                 <ComboBox Name="timesCombo" Grid.Row="3"></ComboBox>
             </Grid>
         </Border>
