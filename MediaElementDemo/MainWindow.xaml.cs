@@ -59,6 +59,8 @@ namespace MediaElementDemo
             }
         }
 
+        
+
         private void LoadSkipped_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -179,6 +181,14 @@ namespace MediaElementDemo
                 VideoSlider.Maximum = Media.NaturalDuration.TimeSpan.TotalSeconds;
                 VideoSlider.Value = Media.Position.TotalSeconds;
                 SkipBlockedTimes();
+            }
+        }
+
+        private void Media_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if (check_autoplay.IsChecked == true)
+            {
+                Media.Position = TimeSpan.FromSeconds(0);
             }
         }
     }

@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Border BorderBrush="White" BorderThickness="1" Grid.Row="1">
-            <MediaElement Name="Media" Margin="2" LoadedBehavior="Manual"/>
+            <MediaElement Name="Media" Margin="2" LoadedBehavior="Manual" MediaEnded="Media_MediaEnded"/>
         </Border>
 
         <Button Grid.Row="1" Grid.Column="0" Width="12" Height="12" Name="sidebar_button" Click="SideBar_Click" HorizontalAlignment="Right"></Button>
@@ -98,16 +98,21 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition Height="22"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Button Click="LoadButton_Click">Load Media</Button>
                 <Button Click="LoadSkipped_Click" Grid.Row="1">Load Skipped</Button>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="8 0 0 0">
+                    <TextBlock Margin="0">Autoplay</TextBlock>
+                    <CheckBox Name="check_autoplay" IsChecked="True" Margin="3"></CheckBox>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Margin="0">Skip Times</TextBlock>
                     <CheckBox Name="check_skip_times" IsChecked="True" Margin="3"></CheckBox>
                 </StackPanel>
-                <ComboBox Name="timesCombo" Grid.Row="3"></ComboBox>
+                <ComboBox Name="timesCombo" Grid.Row="4"></ComboBox>
             </Grid>
         </Border>
     </Grid>
